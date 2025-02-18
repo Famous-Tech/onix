@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - ONIX Gaming</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Les animations de chargement -->
+    <link rel="stylesheet" href="./loader/loader.css">
+    <script src="./loader/loader.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h1>ONIX</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="produits.html">Produits</a>
+            <a href="panier.html" class="active"><i class="fas fa-shopping-cart"></i></a>
+            <a href="compte.html"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="cart-container">
+            <h2>Votre Panier</h2>
+            <div id="cart-items">
+                <!-- Les articles du panier seront injectés ici -->
+            </div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Sous-total:</span>
+                    <span id="subtotal">0 HTG</span>
+                </div>
+                <div class="summary-row">
+                    <span>Livraison:</span>
+                    <span id="shipping">500 HTG</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total">0 HTG</span>
+                </div>
+                <button id="checkout-btn" class="cta-button">
+                    Passer la commande
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ONIX Gaming</h3>
+                <p>Votre destination gaming en Haïti</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: contact@onix.ht</p>
+                <p>Tél: +509 xxxx-xxxx</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ONIX Gaming. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
