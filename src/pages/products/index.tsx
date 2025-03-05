@@ -4,7 +4,7 @@ import { api } from '@/lib/axios';
 import { Product } from '@/types';
 
 export default function Products() {
-  const { data: products, isLoading } = useQuery({
+  const { data: products = [], isLoading } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
       const { data } = await api.get<Product[]>('/products');
@@ -15,7 +15,6 @@ export default function Products() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">All Products</h1>
-
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {[...Array(8)].map((_, i) => (
@@ -26,9 +25,9 @@ export default function Products() {
             </div>
           ))}
         </div>
-      ) : (
+      ) : products.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products?.map((product) => (
+          {products.map((product) => (
             <Link
               key={product.id}
               to={`/products/${product.id}`}
@@ -46,6 +45,8 @@ export default function Products() {
             </Link>
           ))}
         </div>
+      ) : (
+        <p>No products found</p>
       )}
     </div>
   );
