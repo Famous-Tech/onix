@@ -17,7 +17,7 @@ export default function Header() {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       if (result.user) {
-        toast.success('Successfully signed in!');
+        toast.success('Connecte avec succes!');
       }
     } catch (error: any) {
       console.error('Error signing in with Google:', error);
@@ -32,7 +32,7 @@ export default function Header() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      toast.success('Successfully signed out!');
+      toast.success('Deconnexion realise avec succes');
     } catch (error: any) {
       console.error('Error signing out:', error);
       toast.error('Failed to sign out. Please try again.');
@@ -107,7 +107,7 @@ export default function Header() {
             ) : (
               <Button onClick={handleLogin} className="flex items-center gap-2">
                 <User className="h-5 w-5" />
-                <span className="hidden md:inline">Sign In</span>
+                <span className="hidden md:inline">Se connecter</span>
               </Button>
             )}
 
@@ -128,7 +128,7 @@ export default function Header() {
               className="block py-2 hover:text-gray-600"
               onClick={() => setIsMenuOpen(false)}
             >
-              Products
+              Produits
             </Link>
             {user && (
               <Link
@@ -136,7 +136,7 @@ export default function Header() {
                 className="block py-2 hover:text-gray-600"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Orders
+                Commandes
               </Link>
             )}
           </nav>
