@@ -3,19 +3,32 @@ import { Link } from 'react-router-dom';
 import { api } from '@/lib/axios';
 import { Product } from '@/types';
 
+// Add a type guard to ensure product is valid
+const isValidProduct = (product: any): product is Product => {
+  return (
+    product &&
+    typeof product.id === 'string' &&
+    typeof product.name === 'string' &&
+    typeof product.image === 'string' &&
+    typeof product.price === 'number'
+  );
+};
+
 export default function Products() {
-  const { data: products = [], isLoading } = useQuery({
+  const { data: products = [], isLoading, error } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
       const { data } = await api.get<Product[]>('/products');
       return data;
     },
+    // Add error handling
+    retry: 2,
   });
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8">All Products</h1>
-      {isLoading ? (
+  // Handle loading state
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="animate-pulse">
@@ -25,9 +38,28 @@ export default function Products() {
             </div>
           ))}
         </div>
-      ) : products.length > 0 ? (
+      </div>
+    );
+  }
+
+  // Handle error state
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <p className="text-red-500">Error loading products: {error.message}</p>
+      </div>
+    );
+  }
+
+  // Filter out invalid products
+  const validProducts = products.filter(isValidProduct);
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">All Products</h1>
+      {validProducts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {validProducts.map((product) => (
             <Link
               key={product.id}
               to={`/products/${product.id}`}
@@ -41,12 +73,14 @@ export default function Products() {
                 />
               </div>
               <h3 className="font-medium mb-2">{product.name}</h3>
-              <p className="text-gray-600">${product.price.toFixed(2)}</p>
+              <p className="text-gray-600">
+                ${(product.price ?? 0).toFixed(2)}
+              </p>
             </Link>
           ))}
         </div>
       ) : (
-        <p>No products found</p>
+        <p className="text-gray-500">No products found</p>
       )}
     </div>
   );
