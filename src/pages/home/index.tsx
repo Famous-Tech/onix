@@ -16,7 +16,7 @@ export default function Home() {
     <div>
       <section className="relative h-[600px] flex items-center justify-center bg-black text-white">
         <img
-          src="https://images.unsplash.com/photo-1629429408209-1f912961dbd8?auto=format&fit=crop&q=80&w=2000"
+          src=".././assets/home_bg.jpg"
           alt="Hero"
           className="absolute inset-0 w-full h-full object-cover opacity-50"
         />
