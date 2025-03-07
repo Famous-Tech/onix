@@ -16,7 +16,7 @@ export default function Home() {
     <div>
       <section className="relative h-[600px] flex items-center justify-center bg-black text-white">
         <img
-          src=".././assets/home_bg.jpg"
+          src=".././../assets/home_bg.jpg"
           alt="Hero"
           className="absolute inset-0 w-full h-full object-cover opacity-50"
         />
@@ -54,7 +54,7 @@ export default function Home() {
               >
                 <div className="aspect-square rounded-lg overflow-hidden mb-4">
                   <img
-                    src={product.image}
+                    src={product.imageurl}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
