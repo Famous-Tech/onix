@@ -9,6 +9,11 @@ async function getProducts() {
         const response = await fetch(`${API_URL}/products`);
         console.log(`Réponse reçue - Statut HTTP: ${response.status}`);
         
+        // Vérifier si la réponse est OK avant de traiter les données
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP: ${response.status}`);
+        }
+        
         const data = await response.json();
         console.log(`${data.length} produits récupérés avec succès`);
         
@@ -17,7 +22,7 @@ async function getProducts() {
         console.error('Erreur lors de la récupération des produits:', 
                      `Message: ${error.message}`, 
                      `Stack: ${error.stack}`);
-        return [];
+        return []; // Retourner un tableau vide en cas d'erreur
     }
 }
 
